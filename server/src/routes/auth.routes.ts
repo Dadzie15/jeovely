@@ -1,8 +1,25 @@
 import { Router } from "express"
 
-import { notImplementedHandler } from "../middleware/not-implemented.js"
+import { RATE_LIMITS } from "../config/auth.js"
+import { login, logout, me, register } from "../controllers/auth.controller.js"
+import { createRateLimiter } from "../middleware/rate-limit.js"
+import { requireAuth } from "../middleware/require-auth.js"
+import { validate } from "../middleware/validate.js"
+import { loginSchema, registerSchema } from "../schemas/auth.schema.js"
 
-// Planned: sign-up, sign-in, sign-out and session lookup once an auth provider is chosen.
-export const authRouter = Router()
+/** A factory so each app instance (and each test) gets its own rate-limit counters. */
+export function createAuthRouter() {
+  const router = Router()
 
-authRouter.use(notImplementedHandler("Authentication"))
+  router.post("/register", createRateLimiter(RATE_LIMITS.register), validate({ body: registerSchema }), register)
+  router.post(
+    "/login",
+    createRateLimiter({ ...RATE_LIMITS.login, skipSuccessfulRequests: true }),
+    validate({ body: loginSchema }),
+    login
+  )
+  router.get("/me", requireAuth, me)
+  router.post("/logout", logout)
+
+  return router
+}

@@ -20,8 +20,13 @@ const EnvSchema = z.object({
   FRONTEND_URL: csv.default(["http://localhost:5173"]),
   JSON_BODY_LIMIT: z.string().default("100kb"),
   DATABASE_URL: z.string().min(1).optional(),
-  /** Reserved for the auth module; unused until a provider is chosen. */
-  AUTH_SECRET: z.string().min(32, "AUTH_SECRET must be at least 32 characters").optional(),
+  /** How long a sign-in session lasts. */
+  SESSION_TTL_DAYS: z.coerce.number().int().min(1).max(90).default(7),
+  /**
+   * Number of reverse-proxy hops in front of the API (0 = none). Needed so
+   * rate limiting sees the real client IP instead of the proxy's.
+   */
+  TRUST_PROXY: z.coerce.number().int().min(0).max(10).default(0),
 })
 
 const parsed = EnvSchema.safeParse(process.env)
