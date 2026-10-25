@@ -40,20 +40,40 @@ enum ExecutionStatus {
   CANCELLED
 }
 
-/// A person who can sign in. Credentials are intentionally absent until an
-/// authentication provider is selected.
+/// A person who can sign in. `email` is stored normalised (trimmed, lower-case).
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  avatarUrl String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  avatarUrl    String?
+  /// Argon2id hash. Null for accounts that will only use an external provider.
+  passwordHash String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   memberships      WorkspaceMember[]
   createdWorkflows Workflow[]        @relation("WorkflowCreator")
+  sessions         Session[]
 
   @@map("users")
+}
+
+/// A signed-in browser session. The cookie carries a random token; only its
+/// SHA-256 hash is stored, so a database leak doesn't expose usable sessions.
+model Session {
+  id         String   @id @default(cuid())
+  userId     String
+  tokenHash  String   @unique
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  lastUsedAt DateTime @default(now())
+  userAgent  String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("sessions")
 }
 
 /// A team/account that owns workflows. Users join through WorkspaceMember.

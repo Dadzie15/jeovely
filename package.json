@@ -16,6 +16,7 @@
     "typecheck": "npm run typecheck:web && npm run typecheck:api",
     "typecheck:web": "tsc -b",
     "typecheck:api": "npm run typecheck -w server",
+    "test:api": "npm run test -w server",
     "db:generate": "npm run db:generate -w server",
     "db:validate": "npm run db:validate -w server",
     "db:migrate": "npm run db:migrate -w server",

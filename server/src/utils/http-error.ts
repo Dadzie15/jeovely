@@ -14,6 +14,8 @@ export class HttpError extends Error {
 export const badRequest = (message: string, details?: unknown) =>
   new HttpError(400, "BAD_REQUEST", message, details)
 
+export const unauthorized = (message = "Authentication required") => new HttpError(401, "UNAUTHENTICATED", message)
+
 export const notFound = (message = "Resource not found") => new HttpError(404, "NOT_FOUND", message)
 
 export const notImplemented = (feature: string) =>
