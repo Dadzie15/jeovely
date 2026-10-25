@@ -1,0 +1,49 @@
+{
+  "name": "flowly",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:web": "vite",
+    "dev:api": "npm run dev -w server",
+    "dev:full": "concurrently -k -n web,api -c blue,magenta \"npm:dev:web\" \"npm:dev:api\"",
+    "build": "tsc -b && vite build",
+    "build:api": "npm run build -w server",
+    "build:all": "npm run build && npm run build:api",
+    "preview": "vite preview",
+    "start:api": "npm run start -w server",
+    "typecheck": "npm run typecheck:web && npm run typecheck:api",
+    "typecheck:web": "tsc -b",
+    "typecheck:api": "npm run typecheck -w server",
+    "db:generate": "npm run db:generate -w server",
+    "db:validate": "npm run db:validate -w server",
+    "db:migrate": "npm run db:migrate -w server",
+    "db:deploy": "npm run db:deploy -w server",
+    "db:studio": "npm run db:studio -w server"
+  },
+  "dependencies": {
+    "@paper-design/shaders-react": "^0.0.82",
+    "class-variance-authority": "^0.7.1",
+    "cn": "^0.5.0",
+    "framer-motion": "^14.6.0",
+    "lucide-react": "^1.61.0",
+    "radix-ui": "^1.8.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "concurrently": "^10.0.6",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
+  },
+  "workspaces": [
+    "server"
+  ]
+}

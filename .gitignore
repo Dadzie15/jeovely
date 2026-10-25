@@ -1,0 +1,12 @@
+node_modules
+dist
+*.local
+.vite
+
+# Environment files (keep .env.example)
+.env
+.env.*
+!.env.example
+
+# Prisma generated client (regenerate with `npm run db:generate`)
+server/src/generated

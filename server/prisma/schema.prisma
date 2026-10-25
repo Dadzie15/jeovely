@@ -1,0 +1,146 @@
+// Flowly database schema — foundation only.
+//
+// Planned extensions (not modelled yet): integration connections & credentials,
+// per-step execution logs, notifications, analytics rollups, AI-generated
+// workflow drafts, and auth-provider tables (accounts/sessions) once a provider
+// is chosen.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum WorkspaceRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum WorkflowStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  ARCHIVED
+}
+
+enum WorkflowStepType {
+  TRIGGER
+  ACTION
+}
+
+enum ExecutionStatus {
+  PENDING
+  RUNNING
+  SUCCEEDED
+  FAILED
+  CANCELLED
+}
+
+/// A person who can sign in. Credentials are intentionally absent until an
+/// authentication provider is selected.
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  avatarUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  memberships      WorkspaceMember[]
+  createdWorkflows Workflow[]        @relation("WorkflowCreator")
+
+  @@map("users")
+}
+
+/// A team/account that owns workflows. Users join through WorkspaceMember.
+model Workspace {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  members   WorkspaceMember[]
+  workflows Workflow[]
+
+  @@map("workspaces")
+}
+
+/// Many-to-many join between User and Workspace, carrying the member's role.
+model WorkspaceMember {
+  id          String        @id @default(cuid())
+  workspaceId String
+  userId      String
+  role        WorkspaceRole @default(MEMBER)
+  createdAt   DateTime      @default(now())
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, userId])
+  @@index([userId])
+  @@map("workspace_members")
+}
+
+/// An automation: an ordered list of steps (one trigger, then actions).
+model Workflow {
+  id          String         @id @default(cuid())
+  workspaceId String
+  createdById String?
+  name        String
+  description String?
+  status      WorkflowStatus @default(DRAFT)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  workspace  Workspace           @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  createdBy  User?               @relation("WorkflowCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  steps      WorkflowStep[]
+  executions WorkflowExecution[]
+
+  @@index([workspaceId, status])
+  @@map("workflows")
+}
+
+/// One trigger or action within a workflow. `key` identifies the step kind
+/// (e.g. "typeform.form_submitted", "slack.send_message"); `config` holds its
+/// settings. Integration credentials will be referenced from here later.
+model WorkflowStep {
+  id         String           @id @default(cuid())
+  workflowId String
+  position   Int
+  type       WorkflowStepType
+  key        String
+  name       String
+  config     Json             @default("{}")
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  workflow Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+
+  @@index([workflowId, position])
+  @@map("workflow_steps")
+}
+
+/// A single run of a workflow. Per-step logs will hang off this model later.
+model WorkflowExecution {
+  id          String          @id @default(cuid())
+  workflowId  String
+  status      ExecutionStatus @default(PENDING)
+  input       Json?
+  output      Json?
+  error       String?
+  triggeredAt DateTime        @default(now())
+  startedAt   DateTime?
+  finishedAt  DateTime?
+
+  workflow Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+
+  @@index([workflowId, triggeredAt])
+  @@index([status])
+  @@map("workflow_executions")
+}

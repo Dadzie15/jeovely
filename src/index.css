@@ -1,0 +1,172 @@
+/* Only scan the app source for class names (not .agents/ or docs). */
+@import "tailwindcss" source(".");
+
+/*
+ * Flowly design tokens — source of truth: design-system/flowly/MASTER.md
+ * Flowly names (--color-*) are mapped onto shadcn/ui's variable names so
+ * shadcn components pick up the Flowly palette automatically.
+ * Light is the default; dark follows the OS preference (never forced).
+ */
+:root {
+  --radius: 0.75rem;
+
+  --background: #f8fafc;
+  --foreground: #1e293b;
+  --card: #ffffff;
+  --card-foreground: #1e293b;
+  --popover: #ffffff;
+  --popover-foreground: #1e293b;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --primary-strong: #1d4ed8; /* primary text on --muted (4.5:1) */
+  --brand-secondary: #3b82f6;
+  --secondary: #e9eff8;
+  --secondary-foreground: #1e293b;
+  --muted: #e9eff8;
+  --muted-foreground: #475569;
+  --accent: #e9eff8;
+  --accent-foreground: #1e293b;
+  --cta: #ea580c;
+  --cta-foreground: #000000;
+  --destructive: #dc2626;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #2563eb;
+  --success: #15803d;
+
+  --glass: rgb(255 255 255 / 0.62);
+  --glass-border: rgb(255 255 255 / 0.55);
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px rgb(0 0 0 / 0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0b1220;
+    --foreground: #e2e8f0;
+    --card: #111a2e;
+    --card-foreground: #e2e8f0;
+    --popover: #111a2e;
+    --popover-foreground: #e2e8f0;
+    --primary: #3b82f6;
+    --primary-foreground: #0b1220; /* white on #3b82f6 is only 3.7:1 */
+    --primary-strong: #60a5fa;
+    --secondary: #17223a;
+    --secondary-foreground: #e2e8f0;
+    --muted: #17223a;
+    --muted-foreground: #94a3b8;
+    --accent: #17223a;
+    --accent-foreground: #e2e8f0;
+    --cta: #fb923c;
+    --border: #23304a;
+    --input: #23304a;
+    --ring: #60a5fa;
+    --success: #4ade80;
+
+    --glass: rgb(17 26 46 / 0.6);
+    --glass-border: rgb(255 255 255 / 0.1);
+
+    --shadow-md: 0 4px 6px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 10px 15px rgb(0 0 0 / 0.35);
+    --shadow-xl: 0 20px 25px rgb(0 0 0 / 0.45);
+  }
+}
+
+@theme inline {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-strong: var(--primary-strong);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-glass: var(--glass);
+  --color-glass-border: var(--glass-border);
+
+  /* Buttons 8px, cards 12px, panels 16px (MASTER: Component Specs) */
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+}
+
+/* Frosted glass surface (MASTER: Style Guidelines → Key Effects) */
+@utility glass {
+  background-color: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+@utility page-container {
+  width: min(1200px, 100% - 32px);
+  margin-inline: auto;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light dark;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    overflow-x: clip;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply tracking-tight;
+    text-wrap: balance;
+  }
+  a,
+  button {
+    cursor: pointer;
+  }
+  section {
+    scroll-margin-top: 84px;
+  }
+  :focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}
