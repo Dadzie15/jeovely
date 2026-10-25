@@ -3,7 +3,7 @@ import { FileText, MessageSquare, Sparkles } from "lucide-react"
 
 const steps: { icon: LucideIcon; title: string; meta: string; live?: boolean }[] = [
   { icon: FileText, title: "New form submission", meta: "Trigger · Typeform", live: true },
-  { icon: Sparkles, title: "Score & enrich lead", meta: "Action · Flowly AI" },
+  { icon: Sparkles, title: "Score & enrich lead", meta: "Action · Jeovely AI" },
   { icon: MessageSquare, title: "Notify #sales channel", meta: "Action · Slack" },
 ]
 
@@ -18,7 +18,7 @@ export function ProductPreview() {
   return (
     <div
       role="img"
-      aria-label="Flowly dashboard showing an automated workflow from a new form submission to a Slack notification"
+      aria-label="Jeovely dashboard showing an automated workflow from a new form submission to a Slack notification"
       className="glass overflow-hidden rounded-xl shadow-xl"
     >
       <div aria-hidden="true">

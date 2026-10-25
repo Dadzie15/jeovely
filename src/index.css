@@ -2,9 +2,9 @@
 @import "tailwindcss" source(".");
 
 /*
- * Flowly design tokens — source of truth: design-system/flowly/MASTER.md
- * Flowly names (--color-*) are mapped onto shadcn/ui's variable names so
- * shadcn components pick up the Flowly palette automatically.
+ * Jeovely design tokens — source of truth: design-system/jeovely/MASTER.md
+ * Jeovely names (--color-*) are mapped onto shadcn/ui's variable names so
+ * shadcn components pick up the Jeovely palette automatically.
  * Light is the default; dark follows the OS preference (never forced).
  */
 :root {

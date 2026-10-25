@@ -18,7 +18,7 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
-        // Flowly (MASTER: Component Specs → Buttons)
+        // Jeovely (MASTER: Component Specs → Buttons)
         cta: "bg-cta text-cta-foreground shadow-md hover:-translate-y-px hover:opacity-90 motion-reduce:hover:translate-y-0",
         brand:
           "border-2 border-primary bg-transparent text-primary hover:-translate-y-px hover:bg-primary/8 motion-reduce:hover:translate-y-0",

@@ -4,15 +4,15 @@ import { SectionHeading } from "@/components/section-heading"
 const steps = [
   {
     title: "Connect your tools",
-    description: "Sign in to your apps with one click. Flowly handles auth and keeps tokens secure.",
+    description: "Sign in to your apps with one click. Jeovely handles auth and keeps tokens secure.",
   },
   {
     title: "Describe the workflow",
-    description: "Pick a template or tell Flowly AI what you need. It drafts the steps for you.",
+    description: "Pick a template or tell Jeovely AI what you need. It drafts the steps for you.",
   },
   {
     title: "Launch and relax",
-    description: "Turn it on. Flowly runs 24/7, retries on failure and alerts you only when it matters.",
+    description: "Turn it on. Jeovely runs 24/7, retries on failure and alerts you only when it matters.",
   },
 ]
 

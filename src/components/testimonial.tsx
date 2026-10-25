@@ -6,7 +6,7 @@ export function Testimonial() {
       <Reveal className="page-container">
         <figure className="mx-auto max-w-[780px] text-center">
           <blockquote className="text-[clamp(1.3rem,2.6vw,1.75rem)] leading-[1.45] font-semibold tracking-[-0.015em]">
-            “Flowly took about 20 hours of manual handoffs off our ops team every week. It’s the first automation tool our
+            “Jeovely took about 20 hours of manual handoffs off our ops team every week. It’s the first automation tool our
             whole company actually uses.”
           </blockquote>
           <figcaption className="mt-6 flex items-center justify-center gap-3 text-muted-foreground">

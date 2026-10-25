@@ -1,5 +1,5 @@
 /**
- * Thin fetch wrapper for the Flowly API.
+ * Thin fetch wrapper for the Jeovely API.
  *
  * Base URL comes from VITE_API_URL. When unset it falls back to the same-origin
  * "/api" path, which the Vite dev server proxies to the backend (vite.config.ts)
@@ -41,7 +41,7 @@ async function request<T>(method: string, path: string, body?: unknown, options:
       body: body === undefined ? undefined : JSON.stringify(body),
     })
   } catch (cause) {
-    throw new ApiError(0, "NETWORK_ERROR", "Could not reach the Flowly API", cause)
+    throw new ApiError(0, "NETWORK_ERROR", "Could not reach the Jeovely API", cause)
   }
 
   const payload = (await response.json().catch(() => null)) as ApiEnvelope<T> | null

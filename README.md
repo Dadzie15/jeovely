@@ -1,6 +1,6 @@
-# Flowly
+# Jeovely
 
-Flowly is a SaaS workflow-automation platform: users build workflows that connect a
+Jeovely is a SaaS workflow-automation platform: users build workflows that connect a
 **trigger** to a chain of **actions** — for example *new form submission → score lead →
 notify the sales team*.
 
@@ -42,7 +42,7 @@ foundation** (API, database schema, tooling). The product itself is not built ye
 │       ├── services/          database access (Prisma client)
 │       ├── utils/             response + error helpers
 │       └── generated/         Prisma client (generated, git-ignored)
-├── design-system/flowly/      design source of truth (MASTER.md, pages/)
+├── design-system/jeovely/     design source of truth (MASTER.md, pages/)
 └── .env.example               documented environment variables
 ```
 

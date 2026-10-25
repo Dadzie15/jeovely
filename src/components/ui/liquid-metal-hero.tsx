@@ -38,7 +38,7 @@ export interface LiquidMetalHeroProps {
   className?: string
 }
 
-// Flowly palette (MASTER.md): pale trust-blue metal in light mode,
+// Jeovely palette (MASTER.md): pale trust-blue metal in light mode,
 // deep navy with a primary-blue sheen in dark mode.
 const defaultMetal = {
   light: { colorBack: "#b4cbf6", colorTint: "#ffffff" },

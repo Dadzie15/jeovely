@@ -3,7 +3,7 @@ import { createApp } from "./app.js"
 import { disconnectDb } from "./services/database.js"
 
 const server = createApp().listen(env.PORT, () => {
-  console.log(`[api] Flowly API listening on port ${env.PORT} (${env.NODE_ENV})`)
+  console.log(`[api] Jeovely API listening on port ${env.PORT} (${env.NODE_ENV})`)
   if (!env.DATABASE_URL) {
     console.warn("[api] DATABASE_URL is not set; database features are unavailable.")
   }

@@ -16,7 +16,7 @@ export function FinalCta() {
               Ready to get your time back?
             </h2>
             <p className="mx-auto mt-3.5 max-w-[520px] text-[1.075rem] text-blue-50">
-              Join thousands of teams who automate the boring stuff with Flowly.
+              Join thousands of teams who automate the boring stuff with Jeovely.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Button asChild variant="cta" size="xl">

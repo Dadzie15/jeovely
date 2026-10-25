@@ -23,7 +23,7 @@ export function Footer() {
             ))}
           </ul>
         </nav>
-        <p>© 2026 Flowly, Inc.</p>
+        <p>© 2026 Jeovely, Inc.</p>
       </div>
     </footer>
   )

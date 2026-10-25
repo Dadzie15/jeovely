@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  /** Base URL of the Flowly API, e.g. https://api.example.com/api. Defaults to "/api". */
+  /** Base URL of the Jeovely API, e.g. https://api.example.com/api. Defaults to "/api". */
   readonly VITE_API_URL?: string
 }
 

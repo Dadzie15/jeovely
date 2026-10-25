@@ -9,7 +9,7 @@ export function Logo() {
       >
         <Activity className="size-4" strokeWidth={2.5} />
       </span>
-      Flowly
+      Jeovely
       <span className="sr-only"> home</span>
     </a>
   )

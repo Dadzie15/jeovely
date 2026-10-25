@@ -1,4 +1,4 @@
-// Flowly database schema — foundation only.
+// Jeovely database schema — foundation only.
 //
 // Planned extensions (not modelled yet): integration connections & credentials,
 // per-step execution logs, notifications, analytics rollups, AI-generated

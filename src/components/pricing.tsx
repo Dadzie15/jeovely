@@ -31,7 +31,7 @@ const plans: Plan[] = [
     price: "$29",
     period: "/ user / month",
     description: "For teams automating together.",
-    features: ["50,000 runs / month", "Unlimited workflows", "All 300+ integrations", "Flowly AI assistant"],
+    features: ["50,000 runs / month", "Unlimited workflows", "All 300+ integrations", "Jeovely AI assistant"],
     cta: { label: "Start free trial", href: "#" },
     featured: true,
   },

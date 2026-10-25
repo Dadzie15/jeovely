@@ -7,8 +7,8 @@ import { sendSuccess } from "../utils/api-response.js"
 export const getHealth: RequestHandler = async (_req, res) => {
   sendSuccess(res, {
     status: "ok",
-    service: "flowly-api",
-    message: "Flowly API is running",
+    service: "jeovely-api",
+    message: "Jeovely API is running",
     environment: env.NODE_ENV,
     uptimeSeconds: Math.round(process.uptime()),
     database: await checkDatabase(),

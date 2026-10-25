@@ -17,7 +17,7 @@ export function Hero() {
           Team workflows that <span className="text-primary">run themselves.</span>
         </>
       }
-      subtitle="Flowly connects the tools your team already uses and automates the busywork in between, so you spend your day shipping, not copy-pasting."
+      subtitle="Jeovely connects the tools your team already uses and automates the busywork in between, so you spend your day shipping, not copy-pasting."
       primaryCta={{
         label: "Start free trial",
         href: "#pricing",

@@ -1,6 +1,6 @@
 # Landing Page Overrides
 
-> **PROJECT:** Flowly
+> **PROJECT:** Jeovely
 > **Generated:** 2026-10-24 14:01:16
 > **Page Type:** Landing / Marketing
 

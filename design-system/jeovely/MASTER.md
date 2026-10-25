@@ -6,7 +6,7 @@
 
 ---
 
-**Project:** Flowly
+**Project:** Jeovely
 **Generated:** 2026-10-24 14:01:16
 **Category:** SaaS (General)
 **Design Dials:** Variance 5/10 (Balanced / Modern) | Motion 4/10 (Standard) | Density 3/10 (Spacious)
