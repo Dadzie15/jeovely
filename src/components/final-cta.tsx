@@ -1,3 +1,5 @@
+import { Link } from "react-router"
+
 import { Button } from "@/components/ui/button"
 import { Reveal } from "@/components/reveal"
 
@@ -20,7 +22,7 @@ export function FinalCta() {
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Button asChild variant="cta" size="xl">
-                <a href="#pricing">Start free trial</a>
+                <Link to="/register">Start free trial</Link>
               </Button>
               <Button
                 asChild

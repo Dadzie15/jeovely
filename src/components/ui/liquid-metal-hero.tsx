@@ -4,6 +4,7 @@ import { motion, useReducedMotion, type Variants } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { AppLink } from "@/components/app-link"
 import { Card, CardContent } from "@/components/ui/card"
 import type { LiquidMetalTheme } from "@/components/ui/liquid-metal-backdrop"
 
@@ -158,19 +159,19 @@ export function LiquidMetalHero({
             >
               <motion.div variants={buttonVariants}>
                 <Button asChild variant="cta" size="xl" className="w-full sm:w-auto">
-                  <a href={primaryCta.href}>
+                  <AppLink href={primaryCta.href}>
                     {primaryCta.label}
                     {primaryCta.icon}
-                  </a>
+                  </AppLink>
                 </Button>
               </motion.div>
               {secondaryCta && (
                 <motion.div variants={buttonVariants}>
                   <Button asChild variant="brand" size="xl" className="w-full sm:w-auto">
-                    <a href={secondaryCta.href}>
+                    <AppLink href={secondaryCta.href}>
                       {secondaryCta.label}
                       {secondaryCta.icon}
-                    </a>
+                    </AppLink>
                   </Button>
                 </motion.div>
               )}

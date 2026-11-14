@@ -26,6 +26,22 @@ type ApiEnvelope<T> =
 
 type RequestOptions = Omit<RequestInit, "method" | "body">
 
+type UnauthorizedListener = () => void
+const unauthorizedListeners = new Set<UnauthorizedListener>()
+
+/**
+ * Subscribe to "the session is no longer valid" responses (401 UNAUTHENTICATED)
+ * from any endpoint, so the auth state can react to an expired or revoked
+ * session. Wrong-password responses (401 INVALID_CREDENTIALS) do not fire it.
+ * Returns an unsubscribe function.
+ */
+export function onUnauthorized(listener: UnauthorizedListener): () => void {
+  unauthorizedListeners.add(listener)
+  return () => {
+    unauthorizedListeners.delete(listener)
+  }
+}
+
 async function request<T>(method: string, path: string, body?: unknown, options: RequestOptions = {}): Promise<T> {
   const headers = new Headers(options.headers)
   headers.set("Accept", "application/json")
@@ -51,6 +67,9 @@ async function request<T>(method: string, path: string, body?: unknown, options:
   }
   if (!response.ok || !payload.success) {
     const error = payload.success ? undefined : payload.error
+    if (response.status === 401 && error?.code === "UNAUTHENTICATED") {
+      unauthorizedListeners.forEach((listener) => listener())
+    }
     throw new ApiError(
       response.status,
       error?.code ?? "HTTP_ERROR",

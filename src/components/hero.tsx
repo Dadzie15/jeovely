@@ -20,7 +20,7 @@ export function Hero() {
       subtitle="Jeovely connects the tools your team already uses and automates the busywork in between, so you spend your day shipping, not copy-pasting."
       primaryCta={{
         label: "Start free trial",
-        href: "#pricing",
+        href: "/register",
         icon: <ArrowRight aria-hidden="true" className="size-[18px]" />,
       }}
       secondaryCta={{ label: "See how it works", href: "#how" }}

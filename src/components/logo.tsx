@@ -1,8 +1,11 @@
 import { Activity } from "lucide-react"
+import { Link } from "react-router"
 
-export function Logo() {
+const className = "flex w-fit items-center gap-2.5 text-xl font-bold tracking-tight no-underline"
+
+function Mark() {
   return (
-    <a href="#" className="flex items-center gap-2.5 text-xl font-bold tracking-tight no-underline">
+    <>
       <span
         aria-hidden="true"
         className="grid size-[30px] place-items-center rounded-md bg-linear-135 from-primary to-brand-secondary text-white"
@@ -11,6 +14,22 @@ export function Logo() {
       </span>
       Jeovely
       <span className="sr-only"> home</span>
+    </>
+  )
+}
+
+/** On the landing page it scrolls to the top ("#"); elsewhere pass `to` for an in-app link. */
+export function Logo({ to }: { to?: string }) {
+  if (to) {
+    return (
+      <Link to={to} className={className}>
+        <Mark />
+      </Link>
+    )
+  }
+  return (
+    <a href="#" className={className}>
+      <Mark />
     </a>
   )
 }
