@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Reveal } from "@/components/reveal"
+import { AppLink } from "@/components/app-link"
 import { SectionHeading } from "@/components/section-heading"
 
 interface Plan {
@@ -32,7 +33,7 @@ const plans: Plan[] = [
     period: "/ user / month",
     description: "For teams automating together.",
     features: ["50,000 runs / month", "Unlimited workflows", "All 300+ integrations", "Jeovely AI assistant"],
-    cta: { label: "Start free trial", href: "#" },
+    cta: { label: "Start free trial", href: "/register" },
     featured: true,
   },
   {
@@ -89,10 +90,10 @@ export function Pricing() {
                   </CardContent>
                   <CardFooter className="px-8">
                     <Button asChild variant={plan.featured ? "cta" : "brand"} className="w-full">
-                      <a href={plan.cta.href}>
+                      <AppLink href={plan.cta.href}>
                         {plan.cta.label}
                         <span className="sr-only"> — {plan.name} plan</span>
-                      </a>
+                      </AppLink>
                     </Button>
                   </CardFooter>
                 </Card>

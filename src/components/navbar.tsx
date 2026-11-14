@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react"
 import { Menu, X } from "lucide-react"
+import { Link } from "react-router"
 
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/logo"
+import { useAuth } from "@/hooks/use-auth"
 
 const links = [
   { label: "Features", href: "#features" },
@@ -13,6 +15,9 @@ const links = [
 export function Navbar() {
   const [open, setOpen] = useState(false)
   const toggleRef = useRef<HTMLButtonElement>(null)
+  const { status } = useAuth()
+  const account =
+    status === "authenticated" ? { label: "Dashboard", to: "/dashboard" } : { label: "Log in", to: "/login" }
 
   // Escape closes the menu and returns focus to the toggle.
   useEffect(() => {
@@ -48,14 +53,14 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2.5">
-          <a
-            href="#"
+          <Link
+            to={account.to}
             className="px-3 py-2.5 font-semibold text-muted-foreground transition-colors duration-200 hover:text-foreground max-md:hidden"
           >
-            Log in
-          </a>
+            {account.label}
+          </Link>
           <Button asChild variant="cta" className="max-[420px]:px-3.5">
-            <a href="#pricing">Start free trial</a>
+            <Link to="/register">Start free trial</Link>
           </Button>
           <Button
             ref={toggleRef}
@@ -87,9 +92,9 @@ export function Navbar() {
             </li>
           ))}
           <li>
-            <a href="#" className="block py-3 font-medium" onClick={() => setOpen(false)}>
-              Log in
-            </a>
+            <Link to={account.to} className="block py-3 font-medium" onClick={() => setOpen(false)}>
+              {account.label}
+            </Link>
           </li>
         </ul>
       </nav>
